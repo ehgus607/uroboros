@@ -205,4 +205,4 @@ if __name__ == '__main__':
         else:
             pass
     else:
-        print("usage: python pic_process.py binary is_32")
+        print("usage: python3 pic_process.py binary is_32")

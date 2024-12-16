@@ -13,6 +13,6 @@ def help(l):
 lines = map(lambda l : help(l), lines)
 
 
-print "        .section        .ctors,\"aw\",@progbits"
+print ("        .section        .ctors,\"aw\",@progbits")
 for l in lines:
-	print l
+	print(l)

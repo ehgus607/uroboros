@@ -1,5 +1,5 @@
 import sys, os
-import commands
+import subprocess
 
 fn = sys.argv[1]
 
@@ -49,7 +49,7 @@ else:
         # main function
         if "<__libc_start_main@plt>" in l:
             if check_32() == True:
-    	        main_symbol = lines[i-1].split()[-1]
+                main_symbol = lines[i-1].split()[-1]
                 if '0x' not in main_symbol:
                     main_symbol = lines[i-2].split()[-1].split(',')[0]
             else:
@@ -74,14 +74,16 @@ else:
     ## symbols can be leveraged in re-assemble are
     ##	_GLOBAL_OFFSET_TABLE_   ==    ** .got.plt **
     ##	....
-
+    print(main_symbol)
     if not has_found:
-        output = commands.getoutput('readelf -h ' + fn)
+        result = subprocess.run(['readelf', '-h', fn], capture_output=True, text=True)
+        output = result.stdout
         entry_point = ''
         for line in output.split('\n'):
             if 'Entry point address' in line:
                 entry_point = line.split()[-1][2:]
                 break
+
         for i in range(ll):
             if entry_point == lines[i].strip().split(':')[0]:
                 ln = i

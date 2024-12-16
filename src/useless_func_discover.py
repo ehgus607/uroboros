@@ -25,7 +25,7 @@ def check (l):
 		if "<"+b+">:" in l:
 			#print b
 			return b 
-        return "NULL"
+	return "NULL"
 
 res = {}
 
@@ -34,10 +34,10 @@ for l in lines:
 	if l.strip() == "":
 		if in_func != "NULL":
 			end_addr = last_addr
-                        if end_addr[-1] == ':':
-                            end_addr = end_addr[:-1]
+			if end_addr[-1] == ':':
+				end_addr = end_addr[:-1]
 			res[in_func] = (start_addr, end_addr)
-                        in_func = "NULL"
+			in_func = "NULL"
 	else:
 		if check (l) != "NULL":
 			in_func = check(l)

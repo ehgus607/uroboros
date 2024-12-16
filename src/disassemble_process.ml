@@ -17,10 +17,10 @@ module Disam = struct
     let ea = string_of_int ea in
 
     Sys.command("objdump -Dr -j .text "^f^" --start-address="^ba^" --stop-address="^ea^" > "^f^".temp");
-    Sys.command("python useless_func_del.py "^f);
+    Sys.command("python3 useless_func_del.py "^f);
     Sys.command("cat "^f^".disassemble | grep \"^ \" | cut -f1,3 > instrs.info");
 
-    Sys.command("python filter_nop.py");
+    Sys.command("python3 filter_nop.py");
 
 	Sys.command("cut -f 1 instrs.info > text_mem.info");
     ()

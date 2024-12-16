@@ -32,8 +32,8 @@ for info in infos:
 def do_check (addr):
 	addrn = int(addr, 16)
 	for ran in info_range:
-                ba = int(ran[0], 16)
-                ea = int(ran[1], 16)
+		ba = int(ran[0], 16)
+		ea = int(ran[1], 16)
 		#if addrn >= ran[0] and addrn <= ran[1]:
 		if addrn >= ba and addrn <= ea:
 			#print addr + " in " + ran[0] + " " + ran[1]
@@ -43,19 +43,19 @@ def do_check (addr):
 
 
 def check (l):
-        l = l.strip()
-        if l == "":
-                return False
+	l = l.strip()
+	if l == "":
+		return False
 	if ">:" in l:
 		return False
 	addr = l.split(':')[0]
 	if do_check (addr):
            # print l
-            return True
-        else:
-            return False
+		return True
+	else:
+		return False
 
-print "0: useless libc functions removing"
+print ("0: useless libc functions removing")
 
 for i in range(6,len(lines)):
 	l = lines[i]

@@ -1,6 +1,5 @@
 import os
-import commands
-from sets import Set
+import subprocess
 
 def check_exe():
     lines = []
@@ -23,7 +22,8 @@ def check_32():
 
 
 def reassemble():
-    gcc_version = commands.getoutput('gcc --version').split('\n')[0].split()[-1]
+    gcc_version = subprocess.getoutput('gcc --version').split('\n')[0].split()[-1]
+
     if check_32() == True:
         # 32-bit binary
         if gcc_version < '6': os.system('gcc final.s -lm -lrt -lpthread -m32 2> final.error')
@@ -48,7 +48,7 @@ def parse_error():
         map(lambda l : help(l), errors)
 
 
-        return Set(addrs)
+        return set(addrs)
 
 
 def modify(errors):

@@ -58,17 +58,17 @@ for i in range(ll):
         else:
             l = l.replace(".text:","")
     if "lea 0x0(%esi," in l:
-	if ':' in l:
-	    label = l.split(':')[0]   # label:  lea 0x0....
+        if ':' in l:
+            label = l.split(':')[0]   # label:  lea 0x0....
             l = label + " : nop;nop;nop;nop;nop;nop;nop;\n"
-	else:
+        else:
             l = "nop;nop;nop;nop;nop;nop;nop;\n"
     elif "lea 0x0(%edi," in l:
-	if ':' in l:
-	    label = l.split(':')[0]   # label:  lea 0x0....
+        if ':' in l:
+            label = l.split(':')[0]   # label:  lea 0x0....
             l = label + " : nop;nop;nop;nop;nop;nop;nop;\n"
-	else:
-	    label = ""
+        else:
+            label = ""
             l = "nop;nop;nop;nop;nop;nop;nop;\n"
     # __gmon_start__ symbol is resolved by the linked program itself, it surely can not be resolved
     # in our final.s code, just remove it
@@ -90,13 +90,13 @@ for i in range(ll):
     elif "jmpq " in l and "*" not in l:
         l = l.replace('jmpq ', 'jmp ')
     elif "__libc_start_main" in l and is_32 == True:
-	main_symbol = lines[i-1].split()[1]
-	lines[i-1] = lines[i-1].replace(main_symbol, "main")
-	main_symbol = main_symbol[1:].strip()
+        main_symbol = lines[i-1].split()[1]
+        lines[i-1] = lines[i-1].replace(main_symbol, "main")
+        main_symbol = main_symbol[1:].strip()
     elif is_32 == False and "__libc_start_main" in l:
         main_symbol = lines[i-1].split()[-1].split(',')[0]
-	lines[i-1] = lines[i-1].replace(main_symbol, "main")
-	main_symbol = main_symbol[1:].strip()
+        lines[i-1] = lines[i-1].replace(main_symbol, "main")
+        main_symbol = main_symbol[1:].strip()
 	#print main_symbol
 
 ## Some of the PIC code/module rely on typical pattern to locate
@@ -143,7 +143,7 @@ else:
 
     def help(l):
         if main_symbol1 != "" and main_symbol1 in l and l.startswith(main_symbol1):
-    	    l = ".globl main\nmain:\n"+l
+            l = ".globl main\nmain:\n"+l
         return l
     #print lines
     lines = map(lambda l : help(l), lines)
@@ -158,4 +158,4 @@ with open("final.s", 'w') as f:
 
 
 if os.path.isfile('inline_symbols.txt'):
-    os.system('python inline_update.py')
+    os.system('python3 inline_update.py')

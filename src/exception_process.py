@@ -63,7 +63,7 @@ def pat_match1(s):
 	else:
 		pat1 = r'[0-9A-F]+h' # pure number
 		for mp in re.findall(pat1, s):
-		    s = s.replace(mp,"0x"+mp[:-1])
+			s = s.replace(mp,"0x"+mp[:-1])
 		return s
 
 def pat_match2(s):
@@ -75,7 +75,7 @@ def pat_match2(s):
 		elif "S_" not in ms.group(1):
 			t = ms.group(1)
 		else:
-			print "failed : "+s
+			print ("failed : "+s)
 		s1 = update_label2(t)
 		s = s.replace(t,s1)
 	return s
@@ -112,7 +112,7 @@ def typ_trans(t):
 	elif 'string' in t:
 		return t
 	else:
-		print "unsupported type trans : " + t
+		print ("unsupported type trans : " + t)
 
 for l in lines:
 	has_off = False
@@ -121,7 +121,7 @@ for l in lines:
 		has_off = True
 	l = l.replace('offset','')
 	if "'" in l:
-		print l
+		print(l)
 		l = l.replace("'", '"')
 		is_str = True
 	items = l.strip().split()

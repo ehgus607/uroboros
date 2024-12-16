@@ -781,7 +781,7 @@ end
 
     method data_collect =
       let module EU = ELF_utils in
-      Sys.command("python spliter.py");
+      Sys.command("python3 spliter.py");
       (*print_string "begin collection\n"; *)
       data <- self#collect "data_split.info";
       (*print_string "finish data\n"; *)
@@ -1147,7 +1147,7 @@ Printf.fprintf oc "%s\n" (String.concat "\n" (sp#zip data_list));
       end
       else ""
 
-    (* let's try python script *)
+    (* let's try python3 script *)
     method collect name =
       if Sys.file_exists(name) then begin
         let lines = read_file name in
@@ -2103,15 +2103,15 @@ class reassemble =
       help sec addr
 
     method update_deslist_with_initarray =
-      let _ = Sys.command("python parse_init_array.py") in
+      let _ = Sys.command("python3 parse_init_array.py") in
       init_array_list <- read_file "init_array_new.info"
 
     method update_deslist_with_ehframe =
-      let _ = Sys.command("python exception_process.py eh_frame") in
+      let _ = Sys.command("python3 exception_process.py eh_frame") in
       eh_frame_list <- read_file "eh_frame.info"
 
     method update_deslist_with_excp_tbl =
-      let _ = Sys.command("python exception_process.py gcc_exception_table") in
+      let _ = Sys.command("python3 exception_process.py gcc_exception_table") in
       excpt_tbl_list <- read_file "gcc_exception_table.info"
 
 
@@ -2259,7 +2259,7 @@ class reassemble =
 	  else ()
 
     method export_data_dump =
-      Sys.command("python export_data.py");
+      Sys.command("python3 export_data.py");
       let addrs = List.map (String.trim) (read_file "export_datas.info") in
       let aux l =
         match (self#check_sec l) with
