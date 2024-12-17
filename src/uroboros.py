@@ -46,10 +46,6 @@ def check_strip():
 
 def reassemble():
     gcc_version=subprocess.getoutput('gcc --version').split('\n')[0].split()[-1]
-<<<<<<< HEAD
-=======
-    print(gcc_version)
->>>>>>> 0eadcc14b0f0e16133167462f5ee92c67e0758b6
     if check_32() == True:
         # 32-bit binary
         if gcc_version < '6': os.system('gcc final.s -lm -lrt -lpthread -m32')
