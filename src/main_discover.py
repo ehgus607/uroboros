@@ -74,7 +74,6 @@ else:
     ## symbols can be leveraged in re-assemble are
     ##	_GLOBAL_OFFSET_TABLE_   ==    ** .got.plt **
     ##	....
-    print(main_symbol)
     if not has_found:
         result = subprocess.run(['readelf', '-h', fn], capture_output=True, text=True)
         output = result.stdout

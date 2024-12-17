@@ -36,6 +36,6 @@ RUN opam init -a --disable-sandboxing
 RUN opam switch create 4.01.0
 RUN opam install -y deriving.0.7 ocamlfind.1.5.5 parmap.1.0-rc6 batteries.2.3.1
 
-RUN git clone https://github.com/s3team/uroboros.git /root/uroboros
+RUN git clone https://github.com/ehgus607/uroboros.git /root/uroboros
 WORKDIR "/root/uroboros/src"
 RUN eval $(opam env) && ./build
