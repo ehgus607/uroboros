@@ -56,7 +56,7 @@ def modify(errors):
     with open("final.s") as f:
         lines = f.readlines()
     def help(l):
-        e = filter(lambda e : e in l, errors)
+        e = list(filter(lambda e : e in l, errors))
         if e != []:
             addr = e[0][2:]
             #print "undefined label : "+addr
