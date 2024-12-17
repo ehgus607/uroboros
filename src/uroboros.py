@@ -45,8 +45,8 @@ def check_strip():
 
 
 def reassemble():
-    result=subprocess.getoutput('gcc --version').split('\n')[0].split()[-1]
-    gcc_version = result.output
+    gcc_version=subprocess.getoutput('gcc --version').split('\n')[0].split()[-1]
+    print(gcc_version)
     if check_32() == True:
         # 32-bit binary
         if gcc_version < '6': os.system('gcc final.s -lm -lrt -lpthread -m32')
@@ -95,7 +95,7 @@ def process(f, i):
 
         os.system("python3 compile_process.py")
         os.system("python3 label_adjust.py")
-
+        
         reassemble()
 
         if iter_num > 0:

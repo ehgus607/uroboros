@@ -22,9 +22,6 @@ fnl_old = map(lambda l : int(l.split()[0],16), fnl_old)
 #fnl_old = map(lambda l : l.split()[0], fnl_old)
 #print fnl_old
 
-
-
-
 blacklist = ['__libc_csu_init', '__libc_csu_fini', '__i686.get_pc_thunk.bx', '__do_global_ctors_aux', '_start', '__do_global_dtors_aux', 'frame_dummy']
 addrs = []
 addrs_2 = []
@@ -49,9 +46,9 @@ for fn in fnl:
                 d = m.groups()[0]
                 if not d in blacklist:
                     addr = fn.split('<')[0].strip()
-            	    addrs.append("0x" + addr + '\n')
-            	    addrs_2.append(fn)
-	else:
+                    addrs.append("0x" + addr + "\n")
+                    addrs_2.append(fn)
+        else:
             addr = fn.split('<')[0].strip()
             addrs.append("0x" + addr + '\n')
             addrs_2.append(fn)
