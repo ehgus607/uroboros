@@ -82,7 +82,7 @@ def text_process_unstrip(f):
 
             baddr = addr + off
 
-            for key, value in pic_map.iteritems():
+            for key, value in pic_map.items():
                 if value[0] == baddr:
                     # OK, we find it!
                     symb = sec_symb[key]
