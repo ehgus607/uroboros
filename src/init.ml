@@ -25,9 +25,9 @@ object (self)
     ret := Sys.command("objdump -Dr -j .text "^f^" > "^f^".temp");
     self#checkret ret (f^".temp");
 
-    Sys.command("python3 pic_process.py "^f^" "^(string_of_bool !is_32));
-    Sys.command("python3 extern_symbol_process64.py "^f);
-    Sys.command("python3 pic_process64.py "^f^" "^(string_of_bool !is_32));
+    Sys.command("python pic_process.py "^f^" "^(string_of_bool !is_32));
+    Sys.command("python extern_symbol_process64.py "^f);
+    Sys.command("python pic_process64.py "^f^" "^(string_of_bool !is_32));
 
     ret := Sys.command("objdump -s -j \
                         .rodata "^f^" | grep \"^ \" | cut -d \" \" -f3,4,5,6 > rodata.info");
@@ -60,7 +60,7 @@ object (self)
     self#userFuncProcess(f)
 
   method bssHandler (f : string) =
-    let _ = Sys.command("python3 bss_creator.py") in
+    let _ = Sys.command("python bss_creator.py") in
 	(*
               let _ = Sys.command("readelf -s "^f^" | grep 'GLOBAL\|WEAK' \
                 | awk \'/OBJECT/ {print $2,$8}\' > globalbss.info") in ()
@@ -83,10 +83,10 @@ object (self)
                                    > "^f^".disassemble" in
             Sys.command(filter_str);
      *)
-    Sys.command("python3 useless_func_del.py "^f);
+    Sys.command("python useless_func_del.py "^f);
     Sys.command("cat "^f^".disassemble | grep \"^ \" | cut -f1,3 > instrs.info");
 
-    Sys.command("python3 filter_nop.py");
+    Sys.command("python filter_nop.py");
 
 	Sys.command("cut -f 1 instrs.info > text_mem.info")
 
