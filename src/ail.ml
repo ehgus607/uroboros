@@ -114,8 +114,8 @@ object (self)
     Sys.command("cat gcc_exception_table.data >> final.s")
 
   method post_process =
-    Sys.command("python post_process.py");
-    Sys.command("python post_process_lib.py");
+    Sys.command("python3 post_process.py");
+    Sys.command("python3 post_process_lib.py");
     ()
   (*
           self#ehframe_dump;
@@ -123,7 +123,7 @@ object (self)
    *)
 
   method pre_process =
-    let  _ = Sys.command("python pre_process.py") in
+    let  _ = Sys.command("python3 pre_process.py") in
     ()
 
 

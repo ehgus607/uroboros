@@ -1220,7 +1220,7 @@ module Dataset_utils = struct
 
     let insert_data label value size first_time label_pos =
       let first_time = if first_time then "1" else "0" in
-      Sys.command("python data_instrumentation.py " ^ label ^ " " ^ value ^ " " ^ size ^ " " ^ first_time ^ " " ^ label_pos)
+      Sys.command("python3 data_instrumentation.py " ^ label ^ " " ^ value ^ " " ^ size ^ " " ^ first_time ^ " " ^ label_pos)
 
 end
 
