@@ -45,7 +45,9 @@ def parse_error():
                 pass
             elif 'undefined reference' in l and 'S_0x' in l:
                 addrs.append(l.split()[-1][1:-1])
-        map(lambda l : help(l), errors)
+        for error in errors:
+            help(error)
+        # map(lambda l : help(l), errors)
 
 
         return set(addrs)
@@ -62,7 +64,7 @@ def modify(errors):
             #print "undefined label : "+addr
             l = l.replace(e[0], addr)
         return l
-    lines = map(lambda l : help(l), lines)
+    lines = list(map(lambda l : help(l), lines))
     with open("final.s", 'w') as f:
         f.writelines(lines)
 

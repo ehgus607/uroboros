@@ -10,7 +10,7 @@ def help(l):
 		l = l[:-1]
 	l = ".long " + l
 	return l
-lines = map(lambda l : help(l), lines)
+lines = list(map(lambda l : help(l), lines))
 
 
 print ("        .section        .ctors,\"aw\",@progbits")

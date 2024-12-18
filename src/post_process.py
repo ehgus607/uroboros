@@ -146,15 +146,18 @@ else:
             l = ".globl main\nmain:\n"+l
         return l
     #print lines
-    lines = map(lambda l : help(l), lines)
+    lines = list(map(lambda l : help(l), lines))
 
 #branch_routine :pop global_des
 #jmp *branch_des
     #lines.append('switch_bb: jmp *branch_des\n')
 
-
 with open("final.s", 'w') as f:
-    map(lambda l : f.write(l), lines)
+    for l in lines:
+        f.write(l)
+
+# with open("final.s", 'w') as f:
+#     list(map(lambda l : f.write(l), lines))
 
 
 if os.path.isfile('inline_symbols.txt'):

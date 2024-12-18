@@ -39,7 +39,10 @@ def info_collect():
         items = l.split()
         # name ;  begin addr; ... ; size
         pic_map[items[0]] = (int(items[1], 16), int(items[3], 16))
-    map(lambda l: help(l), ls)
+    for line in ls:
+        help(line)
+
+    # map(lambda l: help(l), ls)
 
     return pic_map
 
@@ -82,16 +85,19 @@ def text_process_unstrip(f):
 
             baddr = addr + off
 
-            for key, value in pic_map.iteritems():
+            for key, value in pic_map.items():
                 if value[0] == baddr:
                     # OK, we find it!
                     symb = sec_symb[key]
                     ls[i+1] = t.replace('$'+off_s, symb)
                 elif value[0] < baddr and baddr < (value[0]+value[1]):
                     print("unhandled situation")
+    with open(f + '.temp', 'w') as fd:
+        for l in ls:  # Replace map with an explicit loop
+            fd.write(l + "\n")
 
-    with open(f+'.temp', 'w') as fd:
-        map(lambda l: fd.write(l+ "\n"), ls)
+    # with open(f+'.temp', 'w') as fd:
+    #     map(lambda l: fd.write(l+ "\n"), ls)
 
 def thunk_identify(ls):
     global step
@@ -181,9 +187,12 @@ def text_process_strip(f):
                         adjust_offset(i+2,ls,baddr,register)
                     elif value[0] < baddr and baddr < (value[0]+value[1]):
                         print("unhandled situation")
+    with open(f + '.temp', 'w') as fd:
+        for l in ls:
+            fd.write(l + "\n")
 
-    with open(f+'.temp', 'w') as fd:
-        map(lambda l: fd.write(l+ "\n"), ls)
+    # with open(f+'.temp', 'w') as fd:
+    #     list(map(lambda l: fd.write(l+ "\n"), ls))
 
 
 if __name__ == '__main__':

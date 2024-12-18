@@ -159,7 +159,7 @@ for i in range(0,len(parsed_ls)):
 
 with open(fn+'.data', 'w') as f:
 	f.write('.section        .'+fn+',"aw",@progbits\n.align 4\n')
-	f.writelines(map(lambda l : l[1]+" "+l[2]+" "+l[3]+"\n", parsed_ls))
+	f.writelines(list(map(lambda l : l[1]+" "+l[2]+" "+l[3]+"\n", parsed_ls)))
 
 with open(fn+'.info', 'w') as f:
 	f.writelines(set(text_labels))
