@@ -74,7 +74,7 @@ def get_secs (l):
 
 last_sec = ""
 
-lines = filter(lambda l : l.strip() != "", lines)
+lines = list(filter(lambda l : l.strip() != "", lines))
 
 for i in range(1,len(lines)-1):
 	l = lines[i]

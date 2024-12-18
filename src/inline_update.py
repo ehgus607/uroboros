@@ -14,7 +14,7 @@ with open('inline_symbols.txt') as f:
 # get rid of space; newline and ":"
 symbols = map(lambda s : s.replace(":",""), symbols)
 symbols = map(lambda s : s.strip(), symbols)
-symbols = filter(lambda s : s.strip(), symbols)
+symbols = list(filter(lambda s : s.strip(), symbols))
 
 symbols = set(symbols)
 
